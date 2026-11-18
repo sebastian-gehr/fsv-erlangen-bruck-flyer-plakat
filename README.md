@@ -50,4 +50,4 @@ Wappen, Farben und Schriften nicht ändern. Gestaltungsregeln: siehe `SKILL.md`.
 
 ## Neue Fassung veröffentlichen (für Pflegende)
 
-Änderungen auf `main` committen, dann Version in `package.json` erhöhen und ein Tag pushen, z. B. `git tag v1.1.0 && git push origin v1.1.0`. Der Workflow `.github/workflows/release.yml` legt daraus das Release mit ZIP und Beispiel-PDFs an.
+Änderungen auf `main` committen und die Version in `package.json` erhöhen. Dann auf GitHub unter **Actions → Release → Run workflow** die Version eingeben (z. B. `v1.1.0`). Der Workflow `.github/workflows/release.yml` legt daraus das Release mit ZIP und Beispiel-PDFs an.
