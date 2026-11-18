@@ -14,36 +14,77 @@ Man nennt nur die Eckdaten, der Rest kommt aus einer festen Vorlage – Wappen, 
 
 ## Installation
 
-### Kommandozeile – für Claude Code, Codex (GPT), Gemini CLI, Cursor, GitHub Copilot u. a.
+Welcher Weg passt, hängt davon ab, **wo** man mit der KI arbeitet:
 
-Der Skill folgt dem offenen [Agent-Skills-Format](https://agentskills.io) und lässt sich mit dem Werkzeug [`skills`](https://github.com/vercel-labs/skills) in alle gängigen KI-Agenten installieren:
+| Ich arbeite mit … | Weg |
+|---|---|
+| Claude im Browser (claude.ai) oder im Chat der Claude-Desktop-App | [ZIP hochladen](#claude-chat-browser-und-desktop-app) |
+| Claude Code, OpenAI Codex, Gemini CLI, Cursor, GitHub Copilot (Programmier-Werkzeuge) | [Kommandozeile](#programmier-werkzeuge-kommandozeile) |
+| ChatGPT im Browser oder einer anderen KI ohne Skills | [SKILL.md als Anleitung](#ki-ohne-skill-unterstützung) |
+
+> **Wichtig:** Die Kommandozeile installiert den Skill nur für die Programmier-Werkzeuge. Der normale Claude-Chat (Browser und Desktop-App) sieht diese Installation nicht – dort immer das ZIP hochladen.
+
+### Claude-Chat (Browser und Desktop-App)
+
+1. [`fsv-erlangen-bruck-flyer-plakat.zip`](https://github.com/sebastian-gehr/fsv-erlangen-bruck-flyer-plakat/releases/latest/download/fsv-erlangen-bruck-flyer-plakat.zip) herunterladen (aktuelle Fassung).
+2. In Claude unter **Einstellungen → Fähigkeiten → Skills** die ZIP-Datei hochladen und den Skill einschalten. „Code-Ausführung“ muss eingeschaltet sein.
+3. Einen neuen Chat beginnen.
+
+### Programmier-Werkzeuge (Kommandozeile)
+
+Voraussetzung: [Node.js](https://nodejs.org) ab Version 20. Der Befehl nutzt das Werkzeug [`skills`](https://github.com/vercel-labs/skills) und installiert den Skill für alle Projekte. Je Werkzeug einen Befehl kopieren und einzeln ausführen:
+
+**Claude Code**
 
 ```bash
-npx skills add sebastian-gehr/fsv-erlangen-bruck-flyer-plakat
+npx skills add sebastian-gehr/fsv-erlangen-bruck-flyer-plakat -g -a claude-code -y
 ```
 
-Das Werkzeug erkennt die installierten Agenten und fragt, wohin der Skill soll. Ohne Rückfragen und für alle Projekte (`-g`):
+**OpenAI Codex (GPT)**
 
 ```bash
-npx skills add sebastian-gehr/fsv-erlangen-bruck-flyer-plakat -g -a claude-code -y   # Claude Code
-npx skills add sebastian-gehr/fsv-erlangen-bruck-flyer-plakat -g -a codex -y         # OpenAI Codex
-npx skills add sebastian-gehr/fsv-erlangen-bruck-flyer-plakat -g -a gemini-cli -y    # Gemini CLI
+npx skills add sebastian-gehr/fsv-erlangen-bruck-flyer-plakat -g -a codex -y
 ```
 
-Aktualisieren: `npx skills update` · Entfernen: `npx skills remove fsv-erlangen-bruck-flyer-plakat`
+**Gemini CLI**
 
-### Claude im Browser oder in der Desktop-App
+```bash
+npx skills add sebastian-gehr/fsv-erlangen-bruck-flyer-plakat -g -a gemini-cli -y
+```
 
-1. Unter [Releases](https://github.com/sebastian-gehr/fsv-erlangen-bruck-flyer-plakat/releases/latest) die Datei `fsv-erlangen-bruck-flyer-plakat.zip` herunterladen.
-2. In Claude unter **Einstellungen → Fähigkeiten → Skills** die ZIP-Datei hochladen. „Code-Ausführung“ muss eingeschaltet sein.
+**Cursor**
 
-### KI ohne Skill-Unterstützung (z. B. ChatGPT im Browser)
+```bash
+npx skills add sebastian-gehr/fsv-erlangen-bruck-flyer-plakat -g -a cursor -y
+```
 
-`SKILL.md` als Anleitung in den Chat geben und die Eckdaten nennen. Die KI schreibt daraus die Daten-Datei (JSON); gerendert wird dann lokal wie unter „Ohne KI“.
+**GitHub Copilot**
+
+```bash
+npx skills add sebastian-gehr/fsv-erlangen-bruck-flyer-plakat -g -a github-copilot -y
+```
+
+Nach der Installation das Werkzeug **neu starten** (bzw. eine neue Sitzung beginnen), denn Skills werden nur beim Start geladen. In Claude Code lässt sich der Skill auch direkt mit `/fsv-erlangen-bruck-flyer-plakat` aufrufen.
+
+Neue Fassung holen:
+
+```bash
+npx skills update
+```
+
+Entfernen:
+
+```bash
+npx skills remove fsv-erlangen-bruck-flyer-plakat
+```
+
+### KI ohne Skill-Unterstützung
+
+Zum Beispiel ChatGPT im Browser: Den Inhalt von [`SKILL.md`](SKILL.md) als Anleitung in den Chat geben und die Eckdaten nennen. Die KI schreibt daraus die Daten-Datei (JSON); gerendert wird dann lokal wie unter [Ohne KI](#ohne-ki).
 
 ## Verwendung
 
-Nach der Installation reicht ein Satz:
+Nach der Installation reicht ein Satz, zum Beispiel:
 
 > Flyer für die Weihnachtsfeier, Sa 19.12.2026, 16–22 Uhr, ehemaliges Birkenwäldchen, Glühwein, Grill, Crêpes, Posaunenchor Bruck
 
