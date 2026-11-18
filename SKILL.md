@@ -1,32 +1,39 @@
 ---
 name: fsv-erlangen-bruck-flyer-plakat
-description: Erstellt Flyer und Plakate für Veranstaltungen des FSV Erlangen-Bruck (Weihnachtsfeier, Fasching, Sommerfest, Tennis-Vereinsmeisterschaften, Kleinfeldturnier …) im Stil der Vereinswebsite als A4-Plakat, A5-Flyer (PDF) und Social-Media-Quadrat (PNG).
+description: Erstellt Flyer und Plakate für Veranstaltungen des FSV Erlangen-Bruck (Weihnachtsfeier, Fasching, Sommerfest, Tennis-Vereinsmeisterschaften, Kleinfeldturnier …) im Vereinsdesign als A4-Plakat, A5-Flyer (PDF) und Social-Media-Quadrat (PNG). Verwenden, wenn ein Flyer, Plakat, Aushang oder Social-Media-Bild für eine Vereinsveranstaltung gebraucht wird.
 ---
 
 # FSV Erlangen-Bruck – Flyer und Plakate
 
-Mit diesem Skill entstehen Plakate und Flyer für Veranstaltungen des **FSV Erlangen-Bruck e.V.** – immer im gleichen Stil wie die Vereinswebsite (fsverlangenbruck.de). Wer ihn nutzt, nennt nur die Eckdaten, z. B.:
+Mit diesem Skill entstehen Plakate und Flyer für Veranstaltungen des **FSV Erlangen-Bruck e.V.** – immer im Vereinsdesign der Website (fsverlangenbruck.de) und der Vereinszeitung. Wer ihn nutzt, nennt nur die Eckdaten, z. B.:
 
 > Weihnachtsfeier, Sa 19.12.2026, 16–22 Uhr, ehemaliges Birkenwäldchen, Glühwein, Grill, Crêpes, Posaunenchor Bruck, Feuerkörbe
 
-Claude füllt daraus eine **feste Vorlage** (unten) und rendert sie. Keine KI-Bildgenerierung: Logo, Schriften und Farben kommen immer aus der Vorlage, damit jeder Flyer gleich aussieht und keine Texte verfälscht werden.
+Daraus wird eine **feste Vorlage** gefüllt und gerendert. Keine KI-Bildgenerierung: Logo, Schriften und Farben kommen immer aus der Vorlage, damit jeder Flyer gleich aussieht und keine Texte verfälscht werden.
 
 ## Ablauf
 
-1. **Eckdaten klären.** Pflicht: Anlass, Titel, Datum, Uhrzeit, Ort. Optional: Zeile über dem Titel (`eyebrow`, z. B. „Gemeinsamer Jahresausklang“ oder „Tennisabteilung“), Programmpunkte, ein Hinweis (z. B. „Eintritt frei“, „Anmeldung bis …“). Fehlt eine Pflichtangabe, kurz nachfragen. **Nichts erfinden** – keine Preise, Namen, Uhrzeiten oder Programmpunkte, die nicht genannt wurden.
+1. **Eckdaten klären.** Stil: ohne Wunsch immer `website` (siehe „Stile“); die anderen nur auf Nachfrage oder wenn ausdrücklich gewünscht. Pflicht: Anlass, Titel, Datum, Uhrzeit, Ort. Optional: Zeile über dem Titel (`eyebrow`, z. B. „Gemeinsamer Jahresausklang“ oder „Tennisabteilung“), Programmpunkte, ein Hinweis (z. B. „Eintritt frei“, „Anmeldung bis …“). Fehlt eine Pflichtangabe, kurz nachfragen. **Nichts erfinden** – keine Preise, Namen, Uhrzeiten oder Programmpunkte, die nicht genannt wurden.
 2. **Daten-JSON schreiben** (Schema unten). Texte kurz halten: Titel 1–2 Wörter (lange Wörter mit Bindestrich auf zwei Zeilen trennen, z. B. `["Weihnachts-", "feier"]`), Programmpunkte höchstens 4 Wörter.
 3. **Dateien des Skills nutzen, nicht nachbauen:** `vorlage/flyer.html` (Layout, Farben, Symbole), `assets/fsv-wappen.svg` (Wappen als Vektorgrafik), `scripts/render.mjs` (Rendern). Nichts davon ändern.
-4. **Rendern:** `node <skill-ordner>/scripts/render.mjs daten.json ausgabe` (Formate: `a4,a5,quadrat`, Standard alle drei). Ergebnis: `<dateiname>-a4.pdf/.png`, `-a5.pdf/.png`, `-quadrat.png`.
+4. **Rendern:** `node <skill-ordner>/scripts/render.mjs daten.json ausgabe` – optional `--stil=vereinszeitung|typo` und `--formate=a4,a5,quadrat` (Standard: Stil aus `stil` im JSON bzw. `website`, alle drei Formate). Ergebnis: `<dateiname>[-stil]-a4.pdf/.png`, `-a5.pdf/.png`, `-quadrat.png`. Wer alle Stile vergleichen will: dreimal mit unterschiedlichem `--stil` aufrufen.
    - Fehlt Playwright: `npm i playwright && npx playwright install chromium` versuchen. Geht das nicht (kein Netz), liefert das Skript nur die HTML-Dateien; diese als Ergebnis geben mit dem Hinweis „im Browser öffnen → Drucken → Als PDF speichern, Ränder: keine, Hintergrundgrafiken an“.
-   - Warnungen des Skripts beachten (Titel zu lang, Programm zu lang, Schrift nicht geladen) und Texte kürzen, dann neu rendern.
+   - Warnungen des Skripts (Exit-Code 2) beachten: Titel zu lang, Programm zu lang, Schrift nicht geladen. Texte kürzen und neu rendern.
 5. **Prüfen:** die PNGs ansehen (Datum, Wochentag, Uhrzeit, Ort, Schreibweise „FSV Erlangen-Bruck“). Dann alle Dateien als Entwurf zur Freigabe übergeben.
+
+## Stile (`stil`)
+
+| Wert | Aussehen | Wofür |
+|---|---|---|
+| `website` (Standard) | Navy-Kopf mit Wappen, großer Titel, weiße Terminkarte mit blauem Kalenderblatt, graue Programm-Kacheln, dunkle Fußleiste | Normalfall, passt zur neuen Website |
+| `vereinszeitung` | Weiße Seite mit blauen, schräg abgeschnittenen Bändern wie in der Vereinszeitung, großes Wappen vor der Brucker Kirche, Programm mit blauen Kreis-Symbolen; das Band unten zeigt `programm_zusatz` | Aushänge im Stil der Vereinszeitung |
+| `typo` | Ganz in FSV-Blau, Titel und Datum riesig in Großbuchstaben, schräges Navy-Laufband mit den Programmpunkten (`laufband`), Programm unten im weißen Feld | Plakate, die man von Weitem lesen soll |
 
 ## Gestaltungsregeln (nicht ändern)
 
-- Aufbau: Navy-Kopf mit Wappen und „FSV Erlangen-Bruck e.V. lädt ein“, großer Titel, weiße Terminkarte mit blauem Kalenderblatt, darunter Programm-Kacheln, dunkle Fußleiste mit fsverlangenbruck.de.
 - Farben: FSV-Blau `#0073B6`, Navy `#0B3A5B`, Fußleiste `#0B2233`, Kachelfläche `#F1F6FA`, Text `#14212B`. **Text auf Blau oder Navy ist immer weiß** (bzw. die hellen Töne aus der Vorlage). Kein Orange.
 - Schriften: Barlow (Text) und Barlow Condensed (Titel, Datum).
-- Akzentfarbe je Anlass **nur für die Deko-Symbole** im Kopf, nie für Text.
+- Akzentfarbe je Anlass **nur für die Deko-Symbole** (Sterne, Konfetti, Bälle …), nie für Text.
 - Wappen nie verzerren, umfärben oder beschneiden; immer „FSV Erlangen-Bruck“, nie „FSV Bruck“.
 - Kacheln ohne Rahmen, Ecken 8 px; Schatten nur auf der Terminkarte.
 - Personen nicht farbig hervorheben.
@@ -54,6 +61,7 @@ Andere Anlässe: `allgemein` nehmen, oder `akzent` (Hexfarbe) und `deko` (ein Sy
 {
   "dateiname": "weihnachtsfeier-2026",
   "anlass": "weihnachten",
+  "stil": "website",
   "eyebrow": "Gemeinsamer Jahresausklang",
   "titel": ["Weihnachts-", "feier"],
   "datum": "2026-12-19",
@@ -81,6 +89,7 @@ Andere Anlässe: `allgemein` nehmen, oder `akzent` (Hexfarbe) und `deko` (ein Sy
     { "icon": "musik", "text": "Musik und nette Gespräche" }
   ],
   "hinweis": null,
+  "laufband": null,
   "einladung": "lädt ein",
   "web": "fsverlangenbruck.de"
 }
@@ -89,6 +98,7 @@ Andere Anlässe: `allgemein` nehmen, oder `akzent` (Hexfarbe) und `deko` (ein Sy
 - `datum` / `datum_bis` im Format JJJJ-MM-TT; Wochentag und Monat berechnet die Vorlage selbst. `datum_bis` für mehrtägige Veranstaltungen.
 - `zeit` mit Halbgeviertstrich und Leerzeichen: „16:00 – 22:00 Uhr“ oder „ab 10:00 Uhr“.
 - `karte_zusatz`: dritte Zeile in der Terminkarte (z. B. „Eintritt frei“).
+- `laufband` (nur Stil `typo`): kurze Stichworte fürs Laufband, z. B. `["Glühwein", "Grill", "Crêpes"]`; ohne Angabe die Programmpunkte.
 - A4/A5: höchstens 8 Programmpunkte. Quadrat: höchstens 6 (`programm_quadrat`, sonst die ersten 6 aus `programm`); `hinweis` erscheint nur auf A4/A5.
 - A5 ist das A4-Layout verkleinert, gut für Handzettel; A4 für Aushänge; Quadrat (1080 × 1080) für Instagram, Facebook und WhatsApp-Status.
 
@@ -96,5 +106,6 @@ Andere Anlässe: `allgemein` nehmen, oder `akzent` (Hexfarbe) und `deko` (ein Sy
 
 - `vorlage/flyer.html` – die feste Vorlage (Daten, Format und Wappen setzt das Skript ein)
 - `assets/fsv-wappen.svg` – Wappen als Vektorgrafik (Blau `#006EB7`, Schwarz, Weiß)
+- `assets/bruck-kirche.jpg` – Brucker Kirche (Stil `vereinszeitung`)
 - `scripts/render.mjs` – erzeugt HTML, PDF (A4, A5) und PNG (alle Formate) mit Playwright/Chromium
 - `beispiele/weihnachtsfeier-2026.json` – Beispieldaten (Weihnachtsfeier 19.12.2026)

@@ -1,6 +1,7 @@
-// FSV-Flyer rendern: node render.mjs <daten.json> <ausgabeordner> [a4,a5,quadrat]
+// FSV-Flyer rendern
+//   node scripts/render.mjs <daten.json> [ausgabeordner] [--formate=a4,a5,quadrat] [--stil=website|vereinszeitung|typo]
 // Erzeugt je Format eine HTML-Datei, dazu PDF (A4, A5) und PNG (alle Formate).
-// Braucht Playwright mit Chromium (require('playwright')); Vorlage und Wappen liegen im Skill-Ordner.
+// Braucht Playwright mit Chromium; ohne Playwright entstehen nur die HTML-Dateien.
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -8,15 +9,23 @@ import { createRequire } from 'node:module';
 
 const require = createRequire(import.meta.url);
 const here = dirname(fileURLToPath(import.meta.url));
-const [datenPfad, outDir = 'ausgabe', formateArg] = process.argv.slice(2);
-if (!datenPfad) { console.error('Aufruf: node render.mjs <daten.json> <ausgabeordner> [a4,a5,quadrat]'); process.exit(1); }
+const skill = join(here, '..');
+
+const args = process.argv.slice(2);
+const flags = Object.fromEntries(args.filter(a => a.startsWith('--')).map(a => { const [k, v = ''] = a.slice(2).split('='); return [k, v]; }));
+const [datenPfad, outDir = 'ausgabe', formatePos] = args.filter(a => !a.startsWith('--'));
+if (!datenPfad || 'help' in flags) {
+  console.error('Aufruf: node scripts/render.mjs <daten.json> [ausgabeordner] [--formate=a4,a5,quadrat] [--stil=website|vereinszeitung|typo]');
+  process.exit(datenPfad ? 0 : 1);
+}
 
 const daten = JSON.parse(readFileSync(datenPfad, 'utf8'));
-const formate = (formateArg || (daten.formate || ['a4', 'a5', 'quadrat']).join(',')).split(',');
-const vorlage = readFileSync(join(here, '..', 'vorlage', 'flyer.html'), 'utf8');
-const logo = 'data:image/svg+xml;base64,' + readFileSync(join(here, '..', 'assets', 'fsv-wappen.svg')).toString('base64');
-
-const name = daten.dateiname || 'flyer';
+const stil = flags.stil || daten.stil || 'website';
+const formate = (flags.formate || formatePos || (daten.formate || ['a4', 'a5', 'quadrat']).join(',')).split(',');
+const vorlage = readFileSync(join(skill, 'vorlage', 'flyer.html'), 'utf8');
+const logo = 'data:image/svg+xml;base64,' + readFileSync(join(skill, 'assets', 'fsv-wappen.svg')).toString('base64');
+const kirche = 'data:image/jpeg;base64,' + readFileSync(join(skill, 'assets', 'bruck-kirche.jpg')).toString('base64');
+const name = (daten.dateiname || 'flyer') + (stil === 'website' ? '' : '-' + stil);
 mkdirSync(outDir, { recursive: true });
 
 const SEITE = {
@@ -27,9 +36,10 @@ const SEITE = {
 
 let chromium;
 try { ({ chromium } = require('playwright')); }
-catch { console.error('Playwright fehlt: nur HTML wird erzeugt (im Browser drucken → Als PDF speichern).'); }
+catch { console.error('Playwright fehlt: nur HTML wird erzeugt (im Browser öffnen → Drucken → Als PDF speichern, Ränder: keine, Hintergrundgrafiken an).'); }
 
 const browser = chromium ? await chromium.launch() : null;
+let warnungen = 0;
 for (const f of formate) {
   const s = SEITE[f]; if (!s) { console.error('Unbekanntes Format: ' + f); continue; }
   const layout = f === 'quadrat' ? 'quadrat' : 'a4';
@@ -38,7 +48,9 @@ for (const f of formate) {
   const html = vorlage
     .replace('/*DATA*/null', JSON.stringify(daten))
     .replace('/*FORMAT*/"a4"', JSON.stringify(layout))
+    .replace('/*STIL*/null', JSON.stringify(stil))
     .replace('LOGO_DATA_URI', logo)
+    .replace('KIRCHE_DATA_URI', kirche)
     .replace('</head>', pageCss);
   const htmlPfad = resolve(outDir, `${name}-${f}.html`);
   writeFileSync(htmlPfad, html);
@@ -46,28 +58,12 @@ for (const f of formate) {
 
   const page = await browser.newPage({ viewport: { width: s.w, height: s.h }, deviceScaleFactor: f === 'quadrat' ? 1 : 2 });
   await page.goto('file://' + htmlPfad);
+  await page.waitForFunction(() => window.FLYER_WARNUNGEN !== undefined, null, { timeout: 30000 }).catch(() => {});
   await page.evaluate(() => document.fonts.ready);
   const fontOk = await page.evaluate(() => document.fonts.check('800 40px "Barlow Condensed"') && document.fonts.check('600 20px "Barlow"'));
-  if (!fontOk) console.error('WARNUNG: Barlow nicht geladen (kein Zugriff auf Google Fonts?) – Ersatzschrift verwendet.');
-  const ueberlauf = await page.evaluate(() => {
-    const p = document.querySelector('.page').getBoundingClientRect();
-    const fehler = [];
-    for (const sel of ['.titelblock', '.karte', '.programm']) {
-      const e = document.querySelector(sel); if (!e) continue;
-      const r = e.getBoundingClientRect();
-      if (r.right > p.right + 1 || r.bottom > p.bottom + 1) fehler.push(sel);
-    }
-    const t = document.querySelector('.titelblock').getBoundingClientRect();
-    const k = document.querySelector('.karte').getBoundingClientRect();
-    const pr = document.querySelector('.programm').getBoundingClientRect();
-    const fu = document.querySelector('.fuss'); const fr = fu && getComputedStyle(fu).display !== 'none' ? fu.getBoundingClientRect() : null;
-    if (t.bottom > k.top - 8) fehler.push('Titel stößt an die Terminkarte (Titel kürzen)');
-    if (k.bottom > pr.top) fehler.push('Terminkarte überlappt das Programm');
-    if (fr && pr.bottom > fr.top - 12) fehler.push('Programm zu lang (Punkte kürzen oder weglassen)');
-    if (!fr && pr.bottom > p.bottom - 40) fehler.push('Programm zu lang für das Quadrat (programm_quadrat kürzen)');
-    return fehler;
-  });
-  if (ueberlauf.length) console.error(`WARNUNG ${f}: ` + ueberlauf.join('; '));
+  if (!fontOk) { warnungen++; console.error('WARNUNG: Barlow nicht geladen (kein Zugriff auf Google Fonts?) – Ersatzschrift verwendet.'); }
+  const w = await page.evaluate(() => window.FLYER_WARNUNGEN || ['Vorlage hat nicht gerendert']);
+  if (w.length) { warnungen += w.length; console.error(`WARNUNG ${f}: ` + w.join('; ')); }
   const png = resolve(outDir, `${name}-${f}.png`);
   await page.screenshot({ path: png, clip: { x: 0, y: 0, width: s.w, height: s.h } });
   console.log(png);
@@ -79,3 +75,4 @@ for (const f of formate) {
   await page.close();
 }
 if (browser) await browser.close();
+if (warnungen) process.exitCode = 2;

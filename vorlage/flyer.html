@@ -100,6 +100,149 @@ body{font-family:'Barlow',Arial,sans-serif;color:var(--text);-webkit-print-color
 .f-quadrat .kachel svg{width:30px;height:30px}
 .f-quadrat .hinweis{display:none}
 .f-quadrat .fuss{height:64px;padding:0 64px;font-size:22px}
+/* ================= Stil „vereinszeitung“ ================= */
+.vz{display:flex;flex-direction:column;background:#fff}
+.vz-band{background:var(--blau);color:#fff;clip-path:polygon(0 0,100% 0,100% 72%,90% 100%,0 100%)}
+.vz-verein{font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+.vz-titel{font-family:'Barlow Condensed',sans-serif;font-weight:800;line-height:.95;margin:0;white-space:nowrap}
+.vz-eyebrow{font-weight:600}
+.vz-mitte{position:relative;display:flex;justify-content:space-between}
+.vz-kirche{position:absolute;opacity:.75}
+.vz-wappen{position:relative;flex:none}
+.vz-termin{position:relative;display:flex;flex-direction:column;min-width:0}
+.vz-wtag{font-weight:600;color:var(--text-2)}
+.vz-datum{font-family:'Barlow Condensed',sans-serif;font-weight:800;line-height:.9;color:var(--blau);white-space:nowrap}
+.vz-zeile{display:flex;align-items:flex-start;line-height:1.25}
+.vz-zeile svg{flex:none;color:var(--blau)}
+.vz-zeile.zeit{font-weight:700}
+.vz-zeile.ort{font-weight:600}
+.vz-tab{position:relative;align-self:flex-start;background:var(--blau);color:#fff;font-family:'Barlow Condensed',sans-serif;font-weight:700;clip-path:polygon(0 0,100% 0,calc(100% - 28px) 100%,0 100%);display:flex;align-items:center}
+.vz-raster{position:relative;display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+.vz-punkt{display:flex;align-items:center;font-weight:600;line-height:1.2}
+.vz-kreis{flex:none;border-radius:50%;background:var(--blau);color:#fff;display:flex;align-items:center;justify-content:center}
+.vz-hinweis{position:relative;font-weight:600}
+.vz-luecke{flex:1}
+.vz-fuss{background:var(--blau);color:#fff;clip-path:polygon(10% 0,100% 0,100% 100%,0 100%,0 30%);display:flex;flex-direction:column;align-items:center;justify-content:center;flex:none}
+.vz-motto{display:flex;align-items:center;font-family:'Barlow Condensed',sans-serif;font-weight:700;white-space:nowrap}
+.vz-motto svg{flex:none;color:var(--akzent)}
+.vz-impressum{font-weight:600;white-space:pre}
+
+.vz.f-a4{width:794px;height:1123px}
+.vz.f-a4 .vz-band{padding:44px 56px 58px}
+.vz.f-a4 .vz-verein{font-size:20px;margin-bottom:6px}
+.vz.f-a4 .vz-titel{font-size:104px}
+.vz.f-a4 .vz-eyebrow{font-size:24px;margin-top:10px}
+.vz.f-a4 .vz-mitte{padding:30px 56px 0;gap:24px}
+.vz.f-a4 .vz-kirche{right:-10px;top:10px;width:420px}
+.vz.f-a4 .vz-wappen{width:172px;margin-right:14px}
+.vz.f-a4 .vz-termin{gap:10px;padding-top:8px}
+.vz.f-a4 .vz-wtag{font-size:30px}
+.vz.f-a4 .vz-datum{font-size:100px}
+.vz.f-a4 .vz-zeile{font-size:24px;gap:12px}
+.vz.f-a4 .vz-zeile.zeit{font-size:30px;margin-top:14px;align-items:center}
+.vz.f-a4 .vz-zeile svg{width:30px;height:30px}
+.vz.f-a4 .vz-tab{margin-top:34px;height:46px;padding:0 64px 0 56px;font-size:26px}
+.vz.f-a4 .vz-raster{padding:24px 56px 0;column-gap:32px;row-gap:14px}
+.vz.f-a4 .vz-punkt{font-size:22px;gap:14px}
+.vz.f-a4 .vz-kreis{width:48px;height:48px}
+.vz.f-a4 .vz-kreis svg{width:26px;height:26px}
+.vz.f-a4 .vz-hinweis{font-size:20px;padding:18px 56px 0}
+.vz.f-a4 .vz-fuss{height:168px;padding-top:24px;gap:10px}
+.vz.f-a4 .vz-motto{font-size:44px;gap:16px}
+.vz.f-a4 .vz-motto svg{width:26px;height:26px}
+.vz.f-a4 .vz-impressum{font-size:18px}
+
+.vz.f-quadrat{width:1080px;height:1080px}
+.vz.f-quadrat .vz-band{padding:44px 64px 56px}
+.vz.f-quadrat .vz-verein{font-size:22px;margin-bottom:6px}
+.vz.f-quadrat .vz-titel{font-size:112px}
+.vz.f-quadrat .vz-eyebrow{font-size:26px;margin-top:8px}
+.vz.f-quadrat .vz-mitte{padding:22px 64px 0;gap:24px}
+.vz.f-quadrat .vz-kirche{right:0;top:-10px;width:440px}
+.vz.f-quadrat .vz-wappen{width:170px;margin-right:60px}
+.vz.f-quadrat .vz-termin{gap:8px}
+.vz.f-quadrat .vz-wtag{font-size:30px}
+.vz.f-quadrat .vz-datum{font-size:104px}
+.vz.f-quadrat .vz-zeile{font-size:28px;gap:12px}
+.vz.f-quadrat .vz-zeile.zeit{font-size:32px;margin-top:8px;align-items:center}
+.vz.f-quadrat .vz-zeile svg{width:32px;height:32px}
+.vz.f-quadrat .vz-tab{display:none}
+.vz.f-quadrat .vz-raster{padding:30px 64px 0;column-gap:32px;row-gap:14px}
+.vz.f-quadrat .vz-punkt{font-size:24px;gap:14px}
+.vz.f-quadrat .vz-kreis{width:48px;height:48px}
+.vz.f-quadrat .vz-kreis svg{width:26px;height:26px}
+.vz.f-quadrat .vz-hinweis{display:none}
+.vz.f-quadrat .vz-fuss{height:120px;padding-top:20px;gap:6px}
+.vz.f-quadrat .vz-motto{font-size:38px;gap:14px}
+.vz.f-quadrat .vz-motto svg{width:24px;height:24px}
+.vz.f-quadrat .vz-impressum{font-size:20px}
+
+/* ================= Stil „typo“ ================= */
+.ty{display:flex;flex-direction:column;background:var(--blau);color:#fff}
+.ty-top{display:flex;align-items:center;justify-content:space-between}
+.ty-verein{display:flex;align-items:center;font-weight:700}
+.ty-top > svg{color:var(--akzent)}
+.ty-titel{font-family:'Barlow Condensed',sans-serif;font-weight:800;line-height:.86;text-transform:uppercase;letter-spacing:-.01em;margin:0;white-space:nowrap}
+.ty-datumzeile{display:flex;align-items:flex-end;white-space:nowrap}
+.ty-gross{font-family:'Barlow Condensed',sans-serif;font-weight:800;line-height:.8}
+.ty-neben{display:flex;flex-direction:column}
+.ty-neben .c{font-family:'Barlow Condensed',sans-serif;font-weight:700;line-height:1}
+.ty-neben .j{font-weight:600}
+.ty-band{background:var(--navy);transform:rotate(-3deg);display:flex;align-items:center;white-space:nowrap;overflow:hidden;font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.04em;flex:none}
+.ty-band svg{flex:none;color:var(--akzent)}
+.ty-unten{flex:1;background:#fff;color:var(--text);display:flex;flex-direction:column}
+.ty-eyebrow{font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--blau)}
+.ty-ort{display:flex;align-items:center;font-weight:700;color:var(--navy);line-height:1.2}
+.ty-ort svg{flex:none;color:var(--blau)}
+.ty-raster{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+.ty-punkt{display:flex;align-items:center;font-weight:600;line-height:1.2}
+.ty-punkt svg{flex:none;color:var(--blau)}
+.ty-fusszeile{display:flex;justify-content:space-between;font-weight:600;color:var(--text-2);margin-top:auto}
+.ty-fusszeile .web{color:var(--blau)}
+
+.ty.f-a4{width:794px;height:1123px}
+.ty.f-a4 .ty-top{padding:44px 56px 0}
+.ty.f-a4 .ty-verein{gap:16px;font-size:24px}
+.ty.f-a4 .ty-verein img{width:70px}
+.ty.f-a4 .ty-top > svg{width:44px;height:44px}
+.ty.f-a4 .ty-titel{font-size:136px;margin:44px 50px 0}
+.ty.f-a4 .ty-datumzeile{margin:34px 50px 0;gap:26px}
+.ty.f-a4 .ty-gross{font-size:196px}
+.ty.f-a4 .ty-neben{gap:6px;padding-bottom:6px}
+.ty.f-a4 .ty-neben .c{font-size:44px}
+.ty.f-a4 .ty-neben .j{font-size:20px}
+.ty.f-a4 .ty-band{margin:44px -40px 0;height:72px;gap:22px;padding-left:80px;font-size:32px}
+.ty.f-a4 .ty-band svg{width:22px;height:22px}
+.ty.f-a4 .ty-unten{margin-top:36px;padding:34px 56px 30px;gap:14px}
+.ty.f-a4 .ty-eyebrow{font-size:17px}
+.ty.f-a4 .ty-ort{font-size:26px;gap:12px}
+.ty.f-a4 .ty-ort svg{width:30px;height:30px}
+.ty.f-a4 .ty-raster{column-gap:32px;row-gap:12px;margin-top:6px}
+.ty.f-a4 .ty-punkt{font-size:19px;gap:12px}
+.ty.f-a4 .ty-punkt svg{width:26px;height:26px}
+.ty.f-a4 .ty-fusszeile{font-size:17px}
+
+.ty.f-quadrat{width:1080px;height:1080px}
+.ty.f-quadrat .ty-top{padding:44px 64px 0}
+.ty.f-quadrat .ty-verein{gap:16px;font-size:26px}
+.ty.f-quadrat .ty-verein img{width:72px}
+.ty.f-quadrat .ty-top > svg{width:48px;height:48px}
+.ty.f-quadrat .ty-titel{font-size:124px;margin:30px 58px 0}
+.ty.f-quadrat .ty-datumzeile{margin:26px 58px 0;gap:30px}
+.ty.f-quadrat .ty-gross{font-size:168px}
+.ty.f-quadrat .ty-neben{gap:6px;padding-bottom:4px}
+.ty.f-quadrat .ty-neben .c{font-size:44px}
+.ty.f-quadrat .ty-neben .j{font-size:22px}
+.ty.f-quadrat .ty-band{margin:38px -40px 0;height:70px;gap:22px;padding-left:90px;font-size:32px}
+.ty.f-quadrat .ty-band svg{width:22px;height:22px}
+.ty.f-quadrat .ty-unten{margin-top:30px;padding:30px 64px 26px;gap:12px}
+.ty.f-quadrat .ty-eyebrow{display:none}
+.ty.f-quadrat .ty-ort{font-size:28px;gap:12px}
+.ty.f-quadrat .ty-ort svg{width:30px;height:30px}
+.ty.f-quadrat .ty-raster{column-gap:32px;row-gap:12px;margin-top:4px}
+.ty.f-quadrat .ty-punkt{font-size:23px;gap:12px}
+.ty.f-quadrat .ty-punkt svg{width:28px;height:28px}
+.ty.f-quadrat .ty-fusszeile{font-size:20px}
 </style>
 </head>
 <body>
@@ -138,6 +281,8 @@ body{font-family:'Barlow',Arial,sans-serif;color:var(--text);-webkit-print-color
 const DATA = /*DATA*/null;
 const FORMAT = /*FORMAT*/"a4";
 const LOGO = "LOGO_DATA_URI";
+const KIRCHE = "KIRCHE_DATA_URI";
+const STIL = /*STIL*/null;
 
 const ANLAESSE = {
   weihnachten: { akzent: '#F2C94C', deko: 'stern' },
@@ -163,6 +308,7 @@ function datumTeile(iso){ const [y,m,d]=iso.split('-').map(Number); const dt=new
 
 function render(){
   const d = DATA, fmt = FORMAT === 'quadrat' ? 'quadrat' : 'a4';
+  // Stil „website“ (Standard)
   const a = ANLAESSE[d.anlass] || ANLAESSE.allgemein;
   const root = document.getElementById('flyer');
   const page = el('div', 'page f-'+fmt); root.appendChild(page);
@@ -228,7 +374,144 @@ function render(){
     if (textRects.some(t=> b.left < t.right+12 && b.right > t.left-12 && b.top < t.bottom+8 && b.bottom > t.top-8)) dk.style.display='none';
   });
 }
-render();
+// ---------- gemeinsame Helfer für alle Stile ----------
+const WARNUNGEN = [];
+function titelZeilen(d){ return Array.isArray(d.titel) ? d.titel : [d.titel]; }
+function programmListe(d, fmt, max){ return fmt==='quadrat' ? (d.programm_quadrat || d.programm.slice(0,max)) : d.programm; }
+// Schrift verkleinern, bis das Element in seine Breite passt (höchstens bis min)
+function einpassen(e, breite, min){
+  let fs = parseFloat(getComputedStyle(e).fontSize);
+  while (e.scrollWidth > breite + 1 && fs > min){ fs -= 2; e.style.fontSize = fs + 'px'; }
+  return e.scrollWidth <= breite + 1;
+}
+function datumKurz(d){
+  const p = datumTeile(d.datum), z = n => String(n).padStart(2,'0');
+  if (!d.datum_bis) return { gross: `${z(p.d)}.${z(p.m)}.`, voll: `${z(p.d)}.${z(p.m)}.${p.y}`, wt: p.wt, jahr: p.y };
+  const q = datumTeile(d.datum_bis);
+  const von = p.m===q.m ? `${z(p.d)}.` : `${z(p.d)}.${z(p.m)}.`;
+  return { gross: `${von}–${z(q.d)}.${z(q.m)}.`, voll: `${von}–${z(q.d)}.${z(q.m)}.${q.y}`, wt: `${p.wt} bis ${q.wt}`, jahr: q.y };
+}
+function pruefeUeberlauf(page, inhalt, fuss){
+  const p = page.getBoundingClientRect(), i = inhalt.getBoundingClientRect();
+  const grenze = fuss ? fuss.getBoundingClientRect().top - 8 : p.bottom - 24;
+  if (i.bottom > grenze) WARNUNGEN.push('Inhalt zu lang für die Seite (Programm oder Texte kürzen)');
+}
+
+// ---------- Stil „vereinszeitung“ ----------
+function renderVZ(root, d, a, fmt){
+  const page = el('div', `page vz f-${fmt}`); root.appendChild(page);
+  page.style.setProperty('--akzent', d.akzent || a.akzent);
+  const band = el('div','vz-band'); page.appendChild(band);
+  band.appendChild(el('div','vz-verein','FSV Erlangen-Bruck e.V.'));
+  const h1 = el('h1','vz-titel'); band.appendChild(h1);
+  if (d.eyebrow) band.appendChild(el('div','vz-eyebrow', d.eyebrow));
+
+  const mitte = el('div','vz-mitte'); page.appendChild(mitte);
+  if (KIRCHE.startsWith('data:')) { const k = el('img','vz-kirche'); k.src = KIRCHE; k.alt=''; mitte.appendChild(k); }
+  const t = el('div','vz-termin'); mitte.appendChild(t);
+  const dk = datumKurz(d);
+  t.appendChild(el('div','vz-wtag', dk.wt));
+  const gross = el('div','vz-datum', dk.voll); t.appendChild(gross);
+  if (d.zeit){ const z=el('div','vz-zeile zeit'); z.appendChild(icon('uhr',{stroke:'2.2'})); z.appendChild(el('span',null,d.zeit)); t.appendChild(z); }
+  if (d.ort){ const z=el('div','vz-zeile ort'); z.appendChild(icon('ort',{stroke:'2.2'})); z.appendChild(el('span',null,d.ort)); t.appendChild(z); }
+  if (d.karte_zusatz){ const z=el('div','vz-zeile ort'); z.appendChild(icon('info',{stroke:'2.2'})); z.appendChild(el('span',null,d.karte_zusatz)); t.appendChild(z); }
+  const w = el('img','vz-wappen'); w.src = LOGO; w.alt = 'Wappen FSV Erlangen-Bruck'; mitte.appendChild(w);
+
+  page.appendChild(el('div','vz-tab', d.programm_titel || 'Das erwartet euch'));
+  const r = el('div','vz-raster'); page.appendChild(r);
+  programmListe(d, fmt, 6).forEach(it=>{ const c=el('div','vz-punkt'); const k=el('span','vz-kreis'); k.appendChild(icon(it.icon||'stern')); c.appendChild(k); c.appendChild(el('span',null,it.text)); r.appendChild(c); });
+  if (d.hinweis) page.appendChild(el('div','vz-hinweis', d.hinweis));
+  page.appendChild(el('div','vz-luecke'));
+
+  const f = el('div','vz-fuss'); page.appendChild(f);
+  const m = el('div','vz-motto'); m.appendChild(icon(d.deko||a.deko)); m.appendChild(el('span',null, d.programm_zusatz ? d.programm_zusatz[0].toUpperCase()+d.programm_zusatz.slice(1) : 'FSV Erlangen-Bruck e.V.')); m.appendChild(icon(d.deko||a.deko)); f.appendChild(m);
+  f.appendChild(el('div','vz-impressum', `FSV Erlangen-Bruck e.V.  |  seit 1916  |  ${d.web || 'fsverlangenbruck.de'}`));
+
+  // Titel: getrennte Wörter („Weihnachts-“ + „feier“) möglichst in eine Zeile
+  const zeilen = titelZeilen(d);
+  const breite = band.clientWidth - parseFloat(getComputedStyle(band).paddingLeft)*2;
+  const verbunden = zeilen.reduce((s,z)=> s.endsWith('-') ? s.slice(0,-1)+z : (s? s+' '+z : z), '');
+  h1.textContent = verbunden;
+  const grund = parseFloat(getComputedStyle(h1).fontSize);
+  if (!einpassen(h1, breite, grund*0.72)){
+    h1.style.fontSize = ''; h1.textContent = '';
+    zeilen.forEach((z,i)=>{ if(i) h1.appendChild(document.createElement('br')); h1.appendChild(document.createTextNode(z)); });
+    if (!einpassen(h1, breite, 48)) WARNUNGEN.push('Titel zu lang');
+  }
+  einpassen(gross, t.clientWidth, 56);
+  einpassen(m.querySelector('span'), f.clientWidth*0.8, 24);
+  pruefeUeberlauf(page, d.hinweis ? page.querySelector('.vz-hinweis') : r, f);
+}
+
+// ---------- Stil „typo“ ----------
+function renderTypo(root, d, a, fmt){
+  const page = el('div', `page ty f-${fmt}`); root.appendChild(page);
+  page.style.setProperty('--akzent', d.akzent || a.akzent);
+  const top = el('div','ty-top'); page.appendChild(top);
+  const v = el('div','ty-verein'); const img = el('img'); img.src = LOGO; img.alt = 'Wappen FSV Erlangen-Bruck'; v.appendChild(img); v.appendChild(el('span',null,'FSV Erlangen-Bruck e.V.')); top.appendChild(v);
+  top.appendChild(icon(d.deko||a.deko,{stroke:'1.5'}));
+
+  const h1 = el('h1','ty-titel'); page.appendChild(h1);
+  titelZeilen(d).forEach((z,i)=>{ if(i) h1.appendChild(document.createElement('br')); h1.appendChild(document.createTextNode(z)); });
+
+  const dk = datumKurz(d);
+  const zeile = el('div','ty-datumzeile'); page.appendChild(zeile);
+  const gross = el('span','ty-gross', dk.gross); zeile.appendChild(gross);
+  const n = el('div','ty-neben'); zeile.appendChild(n);
+  n.appendChild(el('span','c', dk.wt));
+  if (d.zeit) n.appendChild(el('span','c', d.zeit));
+  n.appendChild(el('span','j', String(dk.jahr)));
+
+  const band = el('div','ty-band'); page.appendChild(band);
+  const worte = d.laufband || d.programm.map(p=>p.text);
+  const folge = [...worte, ...worte];
+  folge.forEach((w,i)=>{ if(i) band.appendChild(icon(d.deko||a.deko)); band.appendChild(el('span',null,w)); });
+
+  const u = el('div','ty-unten'); page.appendChild(u);
+  if (d.eyebrow) u.appendChild(el('div','ty-eyebrow', d.eyebrow));
+  if (d.ort){ const o = el('div','ty-ort'); o.appendChild(icon('ort',{stroke:'2.2'})); o.appendChild(el('span',null,d.ort)); u.appendChild(o); }
+  const r = el('div','ty-raster'); u.appendChild(r);
+  programmListe(d, fmt, 6).forEach(it=>{ const c=el('div','ty-punkt'); c.appendChild(icon(it.icon||'stern')); c.appendChild(el('span',null,it.text)); r.appendChild(c); });
+  const fz = el('div','ty-fusszeile'); u.appendChild(fz);
+  fz.appendChild(el('span',null, d.hinweis || (d.karte_zusatz || '')));
+  fz.appendChild(el('span','web', d.web || 'fsverlangenbruck.de'));
+
+  const breite = page.clientWidth - 2*parseFloat(getComputedStyle(h1).marginLeft);
+  if (!einpassen(h1, breite, 56)) WARNUNGEN.push('Titel zu lang');
+  let fs = parseFloat(getComputedStyle(gross).fontSize);
+  while (zeile.scrollWidth > breite + 1 && fs > 110){ fs -= 4; gross.style.fontSize = fs + 'px'; }
+  let fn = parseFloat(getComputedStyle(n.firstChild).fontSize);
+  while (zeile.scrollWidth > breite + 1 && fn > 26){ fn -= 2; n.querySelectorAll('.c').forEach(c=>c.style.fontSize = fn + 'px'); }
+  if (zeile.scrollWidth > breite + 1) WARNUNGEN.push('Datum und Uhrzeit zu lang');
+  if (fz.getBoundingClientRect().bottom > page.getBoundingClientRect().bottom - 10) WARNUNGEN.push('Inhalt zu lang für die Seite (Programm oder Texte kürzen)');
+  const rp = r.getBoundingClientRect(), fr = fz.getBoundingClientRect();
+  if (rp.bottom > fr.top - 4) WARNUNGEN.push('Programm zu lang (Punkte kürzen oder weglassen)');
+}
+
+async function start(){
+  // Erst die Schriften laden, sonst wird mit Ersatzschrift gemessen
+  try { await Promise.all(['800 100px "Barlow Condensed"','700 40px "Barlow Condensed"','500 20px Barlow','600 20px Barlow','700 20px Barlow'].map(f=>document.fonts.load(f))); } catch(e) {}
+  const d = DATA, fmt = FORMAT === 'quadrat' ? 'quadrat' : 'a4';
+  const a = ANLAESSE[d.anlass] || ANLAESSE.allgemein;
+  const root = document.getElementById('flyer');
+  const stil = STIL || d.stil || 'website';
+  if (stil === 'vereinszeitung') renderVZ(root, d, a, fmt);
+  else if (stil === 'typo') renderTypo(root, d, a, fmt);
+  else { if (stil !== 'website') WARNUNGEN.push('Unbekannter Stil „'+stil+'“, verwende „website“'); render(); pruefeWebsite(); }
+  window.FLYER_WARNUNGEN = WARNUNGEN;
+}
+function pruefeWebsite(){
+  const p = document.querySelector('.page').getBoundingClientRect();
+  const t = document.querySelector('.titelblock').getBoundingClientRect();
+  const k = document.querySelector('.karte').getBoundingClientRect();
+  const pr = document.querySelector('.programm').getBoundingClientRect();
+  const fr = document.querySelector('.fuss').getBoundingClientRect();
+  if (t.right > p.right + 1) WARNUNGEN.push('Titel zu lang');
+  if (t.bottom > k.top - 8) WARNUNGEN.push('Titel stößt an die Terminkarte (Titel kürzen)');
+  if (k.bottom > pr.top) WARNUNGEN.push('Terminkarte überlappt das Programm');
+  if (pr.bottom > fr.top - 12) WARNUNGEN.push('Programm zu lang (Punkte kürzen oder weglassen)');
+}
+start();
 </script>
 </body>
 </html>
