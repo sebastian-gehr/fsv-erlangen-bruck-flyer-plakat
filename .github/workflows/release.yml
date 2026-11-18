@@ -1,0 +1,43 @@
+name: Release
+
+# Neue Fassung veröffentlichen: Tag setzen und pushen, z. B.
+#   git tag v1.0.0 && git push origin v1.0.0
+# Der Workflow packt den Skill als ZIP, rendert das Beispiel und legt beides als Release ab.
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Beispiel rendern
+        run: |
+          npm install
+          npx playwright install --with-deps chromium
+          npm run beispiel
+
+      - name: Skill als ZIP packen
+        run: |
+          name=fsv-erlangen-bruck-flyer-plakat
+          mkdir -p "/tmp/$name"
+          cp -r SKILL.md README.md package.json assets beispiele scripts vorlage "/tmp/$name/"
+          (cd /tmp && zip -qr "$GITHUB_WORKSPACE/$name.zip" "$name")
+
+      - name: Release anlegen
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" \
+            --title "Flyer-Skill $GITHUB_REF_NAME" \
+            --notes "Skill-ZIP zum Hochladen in Claude (Einstellungen → Fähigkeiten → Skills) oder zum Entpacken für andere Werkzeuge. Dazu das Beispiel Weihnachtsfeier als PDF und PNG." \
+            fsv-erlangen-bruck-flyer-plakat.zip ausgabe/*.pdf ausgabe/*.png

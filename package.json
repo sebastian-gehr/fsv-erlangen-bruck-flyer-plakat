@@ -1,0 +1,14 @@
+{
+  "name": "fsv-erlangen-bruck-flyer-plakat",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Flyer und Plakate des FSV Erlangen-Bruck e.V. im Stil der Vereinswebsite",
+  "type": "module",
+  "scripts": {
+    "render": "node scripts/render.mjs",
+    "beispiel": "node scripts/render.mjs beispiele/weihnachtsfeier-2026.json ausgabe"
+  },
+  "dependencies": {
+    "playwright": "1.63.0"
+  }
+}

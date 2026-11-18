@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>FSV-Flyer</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@500;600;700&amp;family=Barlow+Condensed:wght@700;800&amp;display=block">
+<style>
+:root{
+  --blau:#0073B6; --navy:#0B3A5B; --footer:#0B2233; --flaeche:#F1F6FA;
+  --text:#14212B; --text-2:#3B4A55; --text-3:#5B6B77;
+  --auf-navy:#B9CEDD; --eyebrow:#8EC5EA; --footer-text:#C9D6E0;
+  --akzent:#F2C94C; --radius:8px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:#fff}
+body{font-family:'Barlow',Arial,sans-serif;color:var(--text);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.page{position:relative;overflow:hidden;background:#fff}
+.kopf{position:absolute;left:0;top:0;right:0;background:var(--navy)}
+.deko{position:absolute;color:var(--akzent)}
+.verein{position:absolute;display:flex;align-items:center;gap:18px}
+.verein img{display:block}
+.verein .name{font-weight:700;color:#fff;line-height:1.1}
+.verein .einladung{font-weight:500;color:var(--auf-navy)}
+.titelblock{position:absolute;display:flex;flex-direction:column}
+.eyebrow{font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--eyebrow)}
+.titel{font-family:'Barlow Condensed','Arial Narrow',sans-serif;font-weight:800;line-height:.86;color:#fff;margin:0}
+.karte{position:absolute;background:#fff;border-radius:var(--radius);box-shadow:0 12px 32px rgba(11,34,51,.16);display:flex;align-items:center}
+.kal{flex:none;border-radius:var(--radius);background:var(--blau);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}
+.kal .monat{font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+.kal .tag{font-family:'Barlow Condensed',sans-serif;font-weight:800;line-height:.9}
+.kal .wtag{font-weight:600}
+.termin{display:flex;flex-direction:column;min-width:0}
+.termin .datum{font-family:'Barlow Condensed',sans-serif;font-weight:700;line-height:1}
+.zeile{display:flex;align-items:center;font-weight:600;color:var(--text-2);line-height:1.2}
+.zeile svg{flex:none;color:var(--blau)}
+.programm{position:absolute;display:flex;flex-direction:column}
+.programm .kopfzeile{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.programm h2{font-family:'Barlow Condensed',sans-serif;font-weight:700;line-height:1;margin:0}
+.programm .zusatz{font-weight:500;color:var(--text-3)}
+.raster{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+.kachel{display:flex;align-items:center;background:var(--flaeche);border-radius:var(--radius);font-weight:600;line-height:1.2}
+.kachel svg{flex:none;color:var(--blau)}
+.hinweis{font-weight:600;color:var(--text)}
+.fuss{position:absolute;left:0;right:0;bottom:0;background:var(--footer);display:flex;align-items:center;justify-content:space-between;font-weight:600;color:var(--footer-text)}
+.fuss .web{color:#fff}
+
+/* ---------- A4 (794 x 1123 px), A5 = A4 verkleinert ---------- */
+.f-a4 {width:794px;height:1123px}
+.f-a4 .kopf{height:580px}
+.f-a4 .verein{left:56px;top:48px}
+.f-a4 .verein img{width:84px}
+.f-a4 .verein .name{font-size:24px}
+.f-a4 .verein .einladung{font-size:18px}
+.f-a4 .titelblock{left:56px;right:150px;top:210px;gap:14px}
+.f-a4 .eyebrow{font-size:20px}
+.f-a4 .titel{font-size:132px}
+.f-a4 .titel.lang{font-size:104px}
+.f-a4 .karte{left:56px;right:56px;top:488px;padding:26px;gap:28px}
+.f-a4 .kal{width:132px;height:148px}
+.f-a4 .kal .monat{font-size:20px}
+.f-a4 .kal .tag{font-size:76px}
+.f-a4 .kal .wtag{font-size:17px}
+.f-a4 .termin{gap:12px}
+.f-a4 .termin .datum{font-size:38px}
+.f-a4 .zeile{font-size:24px;gap:10px}
+.f-a4 .zeile svg{width:26px;height:26px}
+.f-a4 .programm{left:56px;right:56px;top:712px;gap:18px}
+.f-a4 .programm h2{font-size:34px}
+.f-a4 .programm .zusatz{font-size:18px}
+.f-a4 .raster{gap:12px}
+.f-a4 .kachel{padding:13px 16px;gap:14px;font-size:20px;min-height:54px}
+.f-a4 .kachel svg{width:28px;height:28px}
+.f-a4 .hinweis{font-size:20px}
+.f-a4 .fuss{height:64px;padding:0 56px;font-size:18px}
+
+/* ---------- Social-Quadrat (1080 x 1080 px) ---------- */
+.f-quadrat{width:1080px;height:1080px}
+.f-quadrat .kopf{height:600px}
+.f-quadrat .verein{left:64px;top:56px}
+.f-quadrat .verein img{width:96px}
+.f-quadrat .verein .name{font-size:30px}
+.f-quadrat .verein .einladung{font-size:22px}
+.f-quadrat .titelblock{left:64px;right:200px;top:210px;gap:14px}
+.f-quadrat .eyebrow{font-size:24px}
+.f-quadrat .titel{font-size:132px}
+.f-quadrat .titel.lang{font-size:104px}
+.f-quadrat .karte{left:64px;right:64px;top:508px;padding:26px;gap:28px}
+.f-quadrat .kal{width:140px;height:156px}
+.f-quadrat .kal .monat{font-size:22px}
+.f-quadrat .kal .tag{font-size:82px}
+.f-quadrat .kal .wtag{font-size:18px}
+.f-quadrat .termin{gap:12px}
+.f-quadrat .termin .datum{font-size:44px}
+.f-quadrat .zeile{font-size:28px;gap:12px}
+.f-quadrat .zeile svg{width:30px;height:30px}
+.f-quadrat .programm{left:64px;right:64px;top:744px;gap:0}
+.f-quadrat .programm .kopfzeile{display:none}
+.f-quadrat .raster{gap:12px}
+.f-quadrat .kachel{padding:14px 18px;gap:14px;font-size:24px;min-height:62px}
+.f-quadrat .kachel svg{width:30px;height:30px}
+.f-quadrat .hinweis{display:none}
+.f-quadrat .fuss{height:64px;padding:0 64px;font-size:22px}
+</style>
+</head>
+<body>
+<div id="flyer"></div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<defs>
+<!-- Programm-Symbole (Strich, 24er Raster) -->
+<symbol id="i-getraenke" viewBox="0 0 24 24"><path d="M4 9h12v6a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V9z"/><path d="M16 11h2a2.5 2.5 0 0 1 0 5h-2"/><path d="M8 3c0 1.5 1 1.5 1 3M12 3c0 1.5 1 1.5 1 3"/></symbol>
+<symbol id="i-bier" viewBox="0 0 24 24"><path d="M5 8h11v11a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8z"/><path d="M16 10h2a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-2"/><path d="M5 8a3 3 0 0 1 3-4 3 3 0 0 1 5 0 3 3 0 0 1 3 4"/><path d="M9 12v5M12 12v5"/></symbol>
+<symbol id="i-grill" viewBox="0 0 24 24"><path d="M3 10h18a9 7 0 0 1-18 0z"/><path d="M8 16l-2 5M16 16l2 5"/><path d="M8 3c0 1.5 1 1.5 1 3M12 3c0 1.5 1 1.5 1 3M16 3c0 1.5 1 1.5 1 3"/></symbol>
+<symbol id="i-essen" viewBox="0 0 24 24"><path d="M5 3v8a2 2 0 0 0 2 2v8M9 3v8a2 2 0 0 1-2 2M7 3v6"/><path d="M17 21V3c-2 1-3 4-3 8h3"/></symbol>
+<symbol id="i-crepes" viewBox="0 0 24 24"><circle cx="10" cy="13" r="7"/><path d="M17 13h5"/><path d="M7 12a3 3 0 0 1 4-2"/></symbol>
+<symbol id="i-kuchen" viewBox="0 0 24 24"><path d="M4 21h16v-8H4z"/><path d="M4 16c2 1.5 4 1.5 6 0s4-1.5 6 0 3 1.5 4 0"/><path d="M12 13V9M12 6a1 1 0 0 1 0-3"/></symbol>
+<symbol id="i-blasmusik" viewBox="0 0 24 24"><path d="M2 10h11l8-5v14l-8-5H2z"/><path d="M6 14v4M10 14v4"/></symbol>
+<symbol id="i-musik" viewBox="0 0 24 24"><path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></symbol>
+<symbol id="i-tanz" viewBox="0 0 24 24"><circle cx="12" cy="4" r="2"/><path d="M12 6v7l-4 8M12 13l4 8M6 9l6-1 6 3"/></symbol>
+<symbol id="i-feuer" viewBox="0 0 24 24"><path d="M12 3c1 4 6 6 6 11a6 6 0 0 1-12 0c0-3 2-4 2-7 2 1 3 3 3 5 1-1 1-5 1-9z"/></symbol>
+<symbol id="i-gespraech" viewBox="0 0 24 24"><path d="M3 5h12v8H8l-4 3v-3H3z"/><path d="M17 9h4v8h-1v3l-4-3h-5v-2"/></symbol>
+<symbol id="i-kinder" viewBox="0 0 24 24"><circle cx="8" cy="6" r="2.5"/><circle cx="17" cy="8" r="2"/><path d="M4 21v-5a4 4 0 0 1 8 0v5M14 21v-4a3 3 0 0 1 6 0v4"/></symbol>
+<symbol id="i-tombola" viewBox="0 0 24 24"><path d="M3 8h18v4H3zM5 12h14v9H5zM12 8v13"/><path d="M12 8c-2-4-6-4-6-1s6 1 6 1 6 2 6-1-4-3-6 1"/></symbol>
+<symbol id="i-pokal" viewBox="0 0 24 24"><path d="M7 4h10v5a5 5 0 0 1-10 0V4z"/><path d="M7 6H4a3 3 0 0 0 3 4M17 6h3a3 3 0 0 1-3 4"/><path d="M12 14v4M8 21h8M9 18h6"/></symbol>
+<symbol id="i-ball" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7l4 3-1.5 5h-5L8 10z"/><path d="M12 3v4M16 10l4.5-1.5M14.5 15l2.5 4M9.5 15L7 19M8 10L3.5 8.5"/></symbol>
+<symbol id="i-tennis" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M5.5 5.5c3.5 3.5 3.5 9.5 0 13M18.5 5.5c-3.5 3.5-3.5 9.5 0 13"/></symbol>
+<symbol id="i-maske" viewBox="0 0 24 24"><path d="M3 7c3-2 15-2 18 0 0 6-3 9-6 9-2 0-2-2-3-2s-1 2-3 2c-3 0-6-3-6-9z"/><path d="M7 10h3M14 10h3"/></symbol>
+<symbol id="i-sonne" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+<symbol id="i-uhr" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+<symbol id="i-ort" viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+<symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></symbol>
+<symbol id="i-stern" viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.5 4.5 2 7.5L12 17l-6.5 4 2-7.5L2 9h7z"/></symbol>
+<symbol id="i-konfetti" viewBox="0 0 24 24"><path d="M4 20l5-14 9 9z"/><path d="M14 4l1 2M19 6l-2 1M20 11h-2M11 3v2"/></symbol>
+</defs>
+</svg>
+
+<script>
+const DATA = /*DATA*/null;
+const FORMAT = /*FORMAT*/"a4";
+const LOGO = "LOGO_DATA_URI";
+
+const ANLAESSE = {
+  weihnachten: { akzent: '#F2C94C', deko: 'stern' },
+  fasching:    { akzent: '#F48FB1', deko: 'konfetti' },
+  sommerfest:  { akzent: '#FFD54F', deko: 'sonne' },
+  tennis:      { akzent: '#D4E157', deko: 'tennis' },
+  fussball:    { akzent: '#8BD3A0', deko: 'ball' },
+  allgemein:   { akzent: '#8EC5EA', deko: 'stern' },
+};
+const MONATE = ['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'];
+const MON_KURZ = ['Jan','Feb','März','Apr','Mai','Juni','Juli','Aug','Sep','Okt','Nov','Dez'];
+const WTAGE = ['Sonntag','Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag'];
+
+function el(tag, cls, text){ const e=document.createElement(tag); if(cls) e.className=cls; if(text!=null) e.textContent=text; return e; }
+function icon(name, extra){
+  const ns='http://www.w3.org/2000/svg';
+  const s=document.createElementNS(ns,'svg'); s.setAttribute('viewBox','0 0 24 24'); s.setAttribute('aria-hidden','true');
+  s.setAttribute('fill','none'); s.setAttribute('stroke','currentColor'); s.setAttribute('stroke-width', extra?.stroke || '2');
+  s.setAttribute('stroke-linecap','round'); s.setAttribute('stroke-linejoin','round');
+  const u=document.createElementNS(ns,'use'); u.setAttribute('href','#i-'+name); s.appendChild(u); return s;
+}
+function datumTeile(iso){ const [y,m,d]=iso.split('-').map(Number); const dt=new Date(Date.UTC(y,m-1,d)); return {y,m,d,wt:WTAGE[dt.getUTCDay()]}; }
+
+function render(){
+  const d = DATA, fmt = FORMAT === 'quadrat' ? 'quadrat' : 'a4';
+  const a = ANLAESSE[d.anlass] || ANLAESSE.allgemein;
+  const root = document.getElementById('flyer');
+  const page = el('div', 'page f-'+fmt); root.appendChild(page);
+  page.style.setProperty('--akzent', d.akzent || a.akzent);
+
+  page.appendChild(el('div','kopf'));
+  // Deko: vier Symbole rechts im Kopf
+  const dekoPos = fmt==='quadrat'
+    ? [[110,70,40,1.6],[190,170,22,2],[90,280,58,1.2],[230,400,24,2]]
+    : [[90,64,34,1.6],[160,150,20,2],[56,236,52,1.2],[110,420,22,2]];
+  dekoPos.forEach(([r,t,s,w])=>{ const i=icon(d.deko||a.deko,{stroke:w}); i.setAttribute('class','deko'); Object.assign(i.style,{right:r+'px',top:t+'px',width:s+'px',height:s+'px'}); page.appendChild(i); });
+
+  const v = el('div','verein');
+  const img = el('img'); img.src = LOGO; img.alt = 'Wappen FSV Erlangen-Bruck'; v.appendChild(img);
+  const vt = el('div'); vt.style.display='flex'; vt.style.flexDirection='column'; vt.style.gap='2px';
+  vt.appendChild(el('span','name','FSV Erlangen-Bruck e.V.'));
+  vt.appendChild(el('span','einladung', d.einladung || 'lädt ein'));
+  v.appendChild(vt); page.appendChild(v);
+
+  const tb = el('div','titelblock');
+  if (d.eyebrow) tb.appendChild(el('div','eyebrow', d.eyebrow));
+  const h1 = el('h1','titel'); const zeilen = Array.isArray(d.titel) ? d.titel : [d.titel];
+  zeilen.forEach((z,i)=>{ if(i) h1.appendChild(document.createElement('br')); h1.appendChild(document.createTextNode(z)); });
+  if (zeilen.length > 2 || Math.max(...zeilen.map(z=>z.length)) > 11) h1.classList.add('lang');
+  tb.appendChild(h1); page.appendChild(tb);
+
+  const p = datumTeile(d.datum);
+  const k = el('div','karte');
+  const kal = el('div','kal');
+  kal.appendChild(el('span','monat', MON_KURZ[p.m-1]));
+  kal.appendChild(el('span','tag', String(p.d)));
+  kal.appendChild(el('span','wtag', p.wt));
+  k.appendChild(kal);
+  const t = el('div','termin');
+  let datumText = `${p.wt}, ${p.d}. ${MONATE[p.m-1]} ${p.y}`;
+  if (d.datum_bis){ const q=datumTeile(d.datum_bis); datumText = `${p.wt.slice(0,2)}, ${p.d}.${p.m===q.m?'':' '+MONATE[p.m-1]} – ${q.wt.slice(0,2)}, ${q.d}. ${MONATE[q.m-1]} ${q.y}`; }
+  t.appendChild(el('div','datum', datumText));
+  [['uhr',d.zeit],['ort',d.ort],['info',d.karte_zusatz]].forEach(([ic,txt])=>{ if(!txt) return; const z=el('div','zeile'); z.appendChild(icon(ic,{stroke:'2.2'})); z.appendChild(el('span',null,txt)); t.appendChild(z); });
+  k.appendChild(t); page.appendChild(k);
+
+  const pr = el('div','programm');
+  const kz = el('div','kopfzeile');
+  kz.appendChild(el('h2',null, d.programm_titel || 'Programm'));
+  if (d.programm_zusatz) kz.appendChild(el('span','zusatz', d.programm_zusatz));
+  pr.appendChild(kz);
+  const liste = fmt==='quadrat' ? (d.programm_quadrat || d.programm.slice(0,6)) : d.programm;
+  const r = el('div','raster');
+  liste.forEach(it=>{ const c=el('div','kachel'); c.appendChild(icon(it.icon||'stern')); c.appendChild(el('span',null,it.text)); r.appendChild(c); });
+  pr.appendChild(r);
+  if (d.hinweis) pr.appendChild(el('div','hinweis', d.hinweis));
+  page.appendChild(pr);
+
+  const f = el('div','fuss');
+  f.appendChild(el('span',null,'FSV Erlangen-Bruck e.V. · seit 1916'));
+  f.appendChild(el('span','web', d.web || 'fsverlangenbruck.de'));
+  page.appendChild(f);
+
+  // Deko-Symbole ausblenden, wenn sie den Titel berühren
+  const rg = document.createRange(); rg.selectNodeContents(h1);
+  const textRects = [...rg.getClientRects()];
+  page.querySelectorAll('.deko').forEach(dk=>{
+    const b = dk.getBoundingClientRect();
+    if (textRects.some(t=> b.left < t.right+12 && b.right > t.left-12 && b.top < t.bottom+8 && b.bottom > t.top-8)) dk.style.display='none';
+  });
+}
+render();
+</script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+{
+  "dateiname": "weihnachtsfeier-2026",
+  "anlass": "weihnachten",
+  "eyebrow": "Gemeinsamer Jahresausklang",
+  "titel": ["Weihnachts-", "feier"],
+  "datum": "2026-12-19",
+  "zeit": "16:00 – 22:00 Uhr",
+  "ort": "Im ehemaligen Birkenwäldchen",
+  "programm_titel": "Programm",
+  "programm_zusatz": "in weihnachtlicher Atmosphäre",
+  "programm": [
+    { "icon": "getraenke", "text": "Glühwein und andere Getränke" },
+    { "icon": "grill", "text": "Spezialitäten vom Grill" },
+    { "icon": "crepes", "text": "Crêpes" },
+    { "icon": "blasmusik", "text": "Posaunenchor Bruck" },
+    { "icon": "feuer", "text": "Feuerkörbe" },
+    { "icon": "musik", "text": "Musikalischer Hintergrund" },
+    { "icon": "gespraech", "text": "Nette Gespräche" }
+  ],
+  "programm_quadrat": [
+    { "icon": "getraenke", "text": "Glühwein und Getränke" },
+    { "icon": "grill", "text": "Spezialitäten vom Grill" },
+    { "icon": "crepes", "text": "Crêpes" },
+    { "icon": "blasmusik", "text": "Posaunenchor Bruck" },
+    { "icon": "feuer", "text": "Feuerkörbe" },
+    { "icon": "musik", "text": "Musik und nette Gespräche" }
+  ]
+}
